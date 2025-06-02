@@ -1,26 +1,93 @@
-@import "tailwindcss";
+/* src/app/globals.css */
+@import "tailwindcss"; /* Según la documentación de Tailwind v4 para Next.js */
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Estilos base y personalizados */
+html, body {
+  /* font-family: 'Inter', sans-serif;  Será manejado por next/font y la variable CSS --font-inter */
+  line-height: 1.6;
+  scrollbar-width: none; /* Para Firefox */
+  -ms-overflow-style: none;  /* Para IE y Edge */
+  /* El color de fondo del body se aplica en layout.tsx */
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+html::-webkit-scrollbar, body::-webkit-scrollbar {
+  display: none; /* Para Chrome, Safari, y Opera */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.nav-link {
+  transition: color 250ms ease-in-out;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Las clases de animación ahora se definen en tailwind.config.ts */
+/* y se usan como animate-slideInFromLeft, animate-scaleIn */
+
+.btn-hover {
+  transition: all 250ms ease-in-out;
+}
+.btn-hover:hover {
+  transform: scale(1.05);
+}
+
+.skill-chip {
+  transition: all 250ms ease-in-out;
+}
+.skill-chip:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2); /* theme('colors.emerald') con opacidad */
+  background-color: rgba(16, 185, 129, 0.1); /* theme('colors.emerald') con opacidad */
+}
+/* La clase .active para skill-chip será condicionalmente aplicada en el componente React */
+.skill-chip.active {
+  border-bottom: 2px solid #10B981; /* theme('colors.emerald') */
+  background-color: rgba(16, 185, 129, 0.2); /* theme('colors.emerald') con opacidad */
+}
+
+.project-card {
+  transition: all 250ms ease-in-out;
+}
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+.project-card img { /* Esto aplicará a next/image también */
+  transition: transform 250ms ease-in-out;
+}
+.project-card:hover img {
+  transform: scale(1.05);
+}
+
+/* La clase .active para modal-content será condicionalmente aplicada en el componente React */
+/* La animación se maneja con animate-modalScaleIn de tailwind.config.ts */
+.modal-content-base { /* Clase base para estilos que no son de animación */
+  opacity: 0; /* Estado inicial antes de la animación */
+  transform: scale(0.9); /* Estado inicial antes de la animación */
+  transition: opacity 250ms ease-in-out, transform 250ms ease-in-out; /* Para la salida */
+}
+.modal-content-base.active-modal { /* La clase para activar la animación de entrada */
+  opacity: 1;
+  transform: scale(1);
+}
+
+
+.form-input {
+  transition: all 250ms ease-in-out;
+}
+.form-input:focus {
+  transform: scale(1.01);
+}
+
+.social-icon {
+  transition: all 250ms ease-in-out;
+}
+.social-icon:hover {
+  transform: scale(1.1);
+  color: #10B981; /* theme('colors.emerald') */
+}
+
+.footer-link {
+  transition: all 250ms ease-in-out;
+}
+.footer-link:hover {
+  transform: scale(1.05);
+  color: #10B981; /* theme('colors.emerald') */
 }
